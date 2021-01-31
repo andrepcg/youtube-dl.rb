@@ -2,6 +2,8 @@
 
 Ruby wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl).
 
+![CI](https://github.com/andrepcg/youtube-dl.rb/workflows/CI/badge.svg)
+
 ## Gem::InstallError: activesupport requires Ruby version >= 2.2.2.
 
 This gem indirectly depends on ActiveSupport, but ActiveSupport 5 (the latest version) requires Ruby version >= 2.2.2. If you are using a version older than this, add this line to your `Gemfile`:
