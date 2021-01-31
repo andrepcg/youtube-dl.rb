@@ -28,6 +28,14 @@ module YoutubeDL
 
   alias_method :get, :download
 
+  def information(urls, options = {})
+    if urls.is_a? Array
+      urls.map { |url| YoutubeDL::Video.information(url, options) }
+    else
+      YoutubeDL::Video.information(urls, options) # Urls should be singular but oh well. url = urls. There. Go cry in a corner.
+    end
+  end
+
   # Lists extractors
   #
   # @return [Array] list of extractors

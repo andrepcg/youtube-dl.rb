@@ -16,6 +16,11 @@ module YoutubeDL
         video
       end
       alias_method :get, :download
+
+      def information(url, options = {})
+        video = new(url, options)
+        video.information
+      end
     end
 
     # @return [YoutubeDL::Options] Download Options for the last download
@@ -62,7 +67,7 @@ module YoutubeDL
     # @param block [Proc] explict block
     # @return [Object] The value from @information
     def method_missing(method, *args, &block)
-      value = 
+      value =
         if information.is_a?(Array)
           information.first[method]
         else

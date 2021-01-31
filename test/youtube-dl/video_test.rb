@@ -79,14 +79,14 @@ describe YoutubeDL::Video do
     end
 
     it 'should be able to be predicted' do
-      predicted_filename = @video.information[:_filename]
+      predicted_filename = @video.information.first[:_filename]
       @video.download
       assert_equal predicted_filename, @video.filename
     end
 
     it 'should return predicted filename before download' do
       predicted_filename = @video.filename
-      assert_equal @video.information[:_filename], predicted_filename # Sanity check
+      assert_equal @video.information.first[:_filename], predicted_filename # Sanity check
       @video.download
       assert_equal predicted_filename, @video.filename
     end
@@ -123,7 +123,8 @@ describe YoutubeDL::Video do
     end
 
     it 'should be a Hash' do
-      assert_instance_of Hash, @information
+      assert_instance_of Array, @information
+      assert_instance_of Hash, @information.first
     end
 
     it 'should not be empty' do
@@ -142,7 +143,7 @@ describe YoutubeDL::Video do
 
   describe '#method_missing' do
     it 'should pull values from @information' do
-      assert_equal 'youtube', @video.information[:extractor] # Sanity Check
+      assert_equal 'youtube', @video.information.first[:extractor] # Sanity Check
       assert_equal 'youtube', @video.extractor
     end
 

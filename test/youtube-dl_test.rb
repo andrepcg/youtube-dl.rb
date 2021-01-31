@@ -13,6 +13,13 @@ describe YoutubeDL do
     end
   end
 
+  describe '.information' do
+    it 'should display video information' do
+      result = YoutubeDL.information TEST_URL
+      assert_equal "20100111", result.first[:upload_date]
+    end
+  end
+
   describe '.download' do
     after do
       remove_downloaded_files
@@ -60,7 +67,7 @@ describe YoutubeDL do
     end
 
     it 'should include the youtube extractors' do
-      ['youtube', 'youtube:channel', 'youtube:search', 'youtube:show', 'youtube:user', 'youtube:playlist'].each do |e|
+      ['youtube', 'youtube:search', 'youtube:playlist'].each do |e|
         assert_includes @extractors, e
       end
     end
@@ -90,7 +97,7 @@ describe YoutubeDL do
     end
 
     it 'should be a specific format with no newlines' do
-      assert_match /Mozilla\/5\.0\s.*\)\z/, @user_agent
+      assert_match /Mozilla\/5\.0.*\)\z/, @user_agent
     end
   end
 end
